@@ -9,19 +9,30 @@ namespace LibrarieModele
 {
     public class Livada
     {
+        private const int SUPRAFATA = 0;
+        private const int ID_LIVADA = 1;
+        private const char SEPARATOR_PRINCIPAL_FISIER = ';';
         public double suprafata { get; set; }
-        public int nr_pomi { get; set; }
+        public string id_livada { get; set; }
 
-        public Livada(double Suprafata, int Nr_pomi)
+        public Livada(double Suprafata, string ID_livada)
         {
             this.suprafata = Suprafata;
-            this.nr_pomi = Nr_pomi;
+            this.id_livada = ID_livada;
 
         }
+        public Livada(string linieFisier)
+        {
+            string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
+
+            this.suprafata = double.Parse(dateFisier[SUPRAFATA]);
+            this.id_livada = dateFisier[ID_LIVADA];
+        }
+
 
         public string Info()
         {
-            string info = $"Suprafata livezii: {suprafata} /n Numarul de pomi din livada: {nr_pomi}";
+            string info = $"Suprafata livezii: {suprafata} /n ID livezi: {id_livada}";
             return info;
         }
 

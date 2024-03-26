@@ -8,6 +8,10 @@ namespace LibrarieModele
 {
     public class Vanzari
     {
+        private const int TIP_FRUCTE = 0;
+        private const int CANTITATEE = 1;
+        private const int PRET= 2;
+        private const char SEPARATOR_PRINCIPAL_FISIER = ';';
         public int tip_fructe { get; set; }
         public double cantitate { get; set; }
         public float pret { get; set; }
@@ -19,6 +23,15 @@ namespace LibrarieModele
             this.pret = Pret;
 
         }
+        public Vanzari(string linieFisier)
+        {
+            string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
+
+            this.tip_fructe = int.Parse(dateFisier[TIP_FRUCTE]);
+            this.cantitate = double.Parse(dateFisier[CANTITATEE]);
+            this.pret = float.Parse(dateFisier[PRET]);
+        }
+
 
         public string Info()
         {

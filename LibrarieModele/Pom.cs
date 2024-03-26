@@ -8,7 +8,12 @@ namespace LibrarieModele
 {
     public class Pom
     {
-        int[] nr_pomi;
+        private const char SEPARATOR_PRINCIPAL_FISIER = ';';
+        private const char SEPARATOR_SECUNDAR_FISIER = ' ';
+        private const int TIP = 0;
+        private const int CANTITATE_FRUCTE = 1;
+        private const int ANUL_PLANTARI = 2;
+
         public string tip { get; set; }
         public int cantitate_fructe { get; set; }
         public int anul_plantarii { get; set; }
@@ -18,22 +23,40 @@ namespace LibrarieModele
             this.cantitate_fructe = Cantitate_fructe;
             this.anul_plantarii = Anul_plantarii;
         }
-
-        public string Info()
+        public Pom(string linieFisier)
         {
-            string info = $"Tipul de pom: {tip} /n Cantitatea de fructe: {cantitate_fructe} /n Anul plantarii: {anul_plantarii}";
+            string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
+
+      
+            this.tip = dateFisier[TIP];
+            this.cantitate_fructe = Convert.ToInt32(dateFisier[CANTITATE_FRUCTE]);
+            this.anul_plantarii = Convert.ToInt32(dateFisier[ANUL_PLANTARI]);
+        }
+
+        public Pom()
+        {
+        }
+
+        public string ConversieLaSir_PentruFisier()
+        {
+            string obiectPomPentruFisier = string.Format("{1}{0}{2}{0}{3}",
+                SEPARATOR_PRINCIPAL_FISIER,
+                tip,
+                cantitate_fructe,
+                anul_plantarii);
+
+            return obiectPomPentruFisier;
+        }
+
+        public string InfoPom()
+        {
+            string info = $"Tipul de pom: {tip} \n Cantitatea de fructe: {cantitate_fructe} \n Anul plantarii: {anul_plantarii}";
             return info;
         }
-        public void SetNr_pomi(int[] _nr_pomi)
-        {
-            nr_pomi = new int[_nr_pomi.Length];
-            _nr_pomi.CopyTo(nr_pomi, 0);
-        }
 
-        public int[] Nr_pomi()
-        {
-            return (int[])nr_pomi.Clone();
-        }
+      
+    
+        
 
     }
 

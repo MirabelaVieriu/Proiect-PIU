@@ -1,6 +1,9 @@
 ﻿using LibrarieModele;
+using NivelStocareDate;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +12,30 @@ namespace proiect
 {
     internal class Program
     {
+       
+
+
         static void Main(string[] args)
         {
+            string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
+            string locatieFisierSolutie = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
 
-            Pom[] pomi = new Pom[0]; 
 
+            GestionarePomiFisiereText adminPomi = new GestionarePomiFisiereText(numeFisier);
+
+            Pom pomNou = new Pom ();
+            int nrpomi = 0;
+
+            Pom[] pomi = adminPomi.GetPomi(out nrpomi);
+    
             string optiune;
             do
             {
-                Console.WriteLine("C. Introduceti detalii pentru pomi");
+                Console.WriteLine("C. Introduceti detalii pentru pom");
                 Console.WriteLine("A. Afisati pomi introdusi");
+
+                Console.WriteLine("W. Salvare pom in fisier");
                 Console.WriteLine("S. Cautare pomi de acelasi tip");
                 Console.WriteLine("X. Iesire din program");
 
@@ -28,15 +45,21 @@ namespace proiect
                 switch (optiune.ToUpper())
                 {
                     case "C":
-                        pomi = IntroducereDetaliiPomi();
-                        break;
+                        pomNou = CitirePomTastatura();
+                        break; 
                     case "A":
-                        AfisarePomiIntrodusi(pomi);
+                        pomi = adminPomi.GetPomi (out nrpomi);
+                        GestionarePomi.AfisarePomiIntrodusi(pomi);
                         break;
-                    case "B":
-                         string tipCautat=Console.ReadLine();
-                         Afisarepomideacelasitip(pomi, tipCautat);
-                        break;   
+                    case "S":
+                        Console.WriteLine("Introduceti tipul de pom cautat:");
+                        string tipCautat = Console.ReadLine();
+                        GestionarePomi.AfisarePomiDeAcelasiTip(pomi, tipCautat);
+                        break;
+                    case "W":
+                        adminPomi.AddPomi(pomNou);
+                        break;
+
                     case "X":
                         return;
                     default:
@@ -48,71 +71,36 @@ namespace proiect
 
             Console.ReadKey();
         }
-        
 
-        public static Pom[] IntroducereDetaliiPomi()
+        public static Pom CitirePomTastatura()
         {
-            Console.Write("Introduceti numarul de pomi: ");
-            if (!int.TryParse(Console.ReadLine(), out int numarPomi) || numarPomi <= 0)
-            {
-                Console.WriteLine("Va rugam sa introduceti un numar valid de pomi.");
-                return new Pom[0]; 
-            }
+            Console.WriteLine("Introduceti tipul de pom: ");
+            string tip= Console.ReadLine();
 
-            Pom[] pomi = new Pom[numarPomi];
+            Console.WriteLine("Introduceti cantitatea de fructe: ");
+            int cantitate_fructe = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 0; i < numarPomi; i++)
-            {
-                Console.WriteLine($"Introduceti detalii pentru pomul {i + 1}:");
-                Console.Write("Tipul de pom: ");
-                string tip = Console.ReadLine();
 
-                Console.Write("Cantitatea de fructe: ");
-                if (!int.TryParse(Console.ReadLine(), out int cantitateFructe))
-                {
-                    Console.WriteLine("Va rugam sa introduceti o valoare valida pentru cantitatea de fructe.");
-                    return new Pom[0]; 
-                }
+            Console.WriteLine("Introduceti anul plantari:");
+            int  anul_plantari =Convert.ToInt32( Console.ReadLine());
 
-                Console.Write("Anul plantarii: ");
-                if (!int.TryParse(Console.ReadLine(), out int anulPlantarii))
-                {
-                    Console.WriteLine("Va rugam sa introduceti un an valid pentru plantare.");
-                    return new Pom[0];
-                }
+            Pom pom= new Pom(tip, cantitate_fructe, anul_plantari);
 
-                pomi[i] = new Pom(tip, cantitateFructe, anulPlantarii);
-            }
-
-            return pomi;
+            return pom;
         }
 
-        public static void AfisarePomiIntrodusi(Pom[] pomi)
+        public static void AfisarePom(Pom pom)
         {
-            if (pomi.Length == 0)
-            {
-                Console.WriteLine("Nu exista pomi introdusi inca.");
-                return;
-            }
-
-            Console.WriteLine("\nPomi introdusi:");
-            foreach (var pom in pomi)
-            {
-                Console.WriteLine(pom.Info());
-            }
+            string InfoPom = string.Format($"Tipul de pom: {pom.tip} \n Cantitatea de fructe: {pom.cantitate_fructe} \n Anul plantarii: {pom.anul_plantarii}");
+            Console.WriteLine(InfoPom);
         }
-
-        public static void Afisarepomideacelasitip(Pom[] pomi, string tipCautat)
+        public static void AfisarePomi(Pom[] pomi)
         {
-            
-           Console.WriteLine($"\nPomi de acelasi tip '{tipCautat}' sunt:");
-
-            foreach (var pom in pomi)
+            Console.WriteLine("Pomi sunt:");
+            foreach (Pom pom in pomi)
             {
-                if (pom.tip == tipCautat)
-                {
-                    Console.WriteLine(pom.Info());
-                }
+                string InfoPom = pom.InfoPom();
+                Console.WriteLine(InfoPom);
             }
         }
     }
