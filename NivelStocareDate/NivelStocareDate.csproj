@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestionareLivezi.cs" />
+    <Compile Include="GestionareLiveziFisiereText.cs" />
     <Compile Include="GestionarePomi.cs" />
     <Compile Include="GestionarePomiFisiereText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

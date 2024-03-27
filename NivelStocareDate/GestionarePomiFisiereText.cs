@@ -10,19 +10,19 @@ namespace NivelStocareDate
 {
     public class GestionarePomiFisiereText
     {
-        
-            private const int NR_MAX_POMI = 100;
-            private string numeFisier;
 
-            public GestionarePomiFisiereText(string numeFisier)
-            {
-                this.numeFisier = numeFisier;
-                Stream streamFisierText = File.Open(numeFisier, FileMode.OpenOrCreate);
-                streamFisierText.Close();
-            }
+        private const int NR_MAX_POMI = 100;
+        private string numeFisier;
+
+        public GestionarePomiFisiereText(string numeFisier)
+        {
+            this.numeFisier = numeFisier;
+            Stream streamFisierText = File.Open(numeFisier, FileMode.OpenOrCreate);
+            streamFisierText.Close();
+        }
         public void AddPomi(Pom pom)
         {
-          
+
             using (StreamWriter streamWriterFisierText = new StreamWriter(numeFisier, true))
             {
                 streamWriterFisierText.WriteLine(pom.ConversieLaSir_PentruFisier());
@@ -33,7 +33,7 @@ namespace NivelStocareDate
         {
             Pom[] pomi = new Pom[NR_MAX_POMI];
 
-           
+
             using (StreamReader streamReader = new StreamReader(numeFisier))
             {
                 string linieFisier;
@@ -45,12 +45,30 @@ namespace NivelStocareDate
                 }
             }
 
-        
+
             Array.Resize(ref pomi, nrPomi);
 
             return pomi;
         }
-     
+        public void AfisarePomiDeAcelasiTip(string tipCautat)
+        {
+            Console.WriteLine($"\nPomi de acelasi tip '{tipCautat}' sunt:");
+            using (StreamReader streamReader = new StreamReader(numeFisier))
+            {
+                string linieFisier;
+                while ((linieFisier = streamReader.ReadLine()) != null)
+                {
+                    Pom pom = new Pom(linieFisier); 
+                    if (pom.tip == tipCautat)
+                    {
+                        Console.WriteLine(pom.ConversieLaSir_PentruFisier());
+                    }
+                }
+            }
 
+
+        }
+
+       
     }
 }

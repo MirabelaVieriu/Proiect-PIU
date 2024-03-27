@@ -21,19 +21,31 @@ namespace LibrarieModele
             this.id_livada = ID_livada;
 
         }
+        public Livada()
+        {
+            
+        }
         public Livada(string linieFisier)
         {
             string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
 
-            this.suprafata = double.Parse(dateFisier[SUPRAFATA]);
+            this.suprafata = Convert.ToDouble((dateFisier[SUPRAFATA]));
             this.id_livada = dateFisier[ID_LIVADA];
         }
-
-
-        public string Info()
+        public string ConversieLaSir_PentruFisier()
         {
-            string info = $"Suprafata livezii: {suprafata} /n ID livezi: {id_livada}";
+            string obiectLivadaPentruFisier = string.Format("{1}{0}{2}{0}",
+                SEPARATOR_PRINCIPAL_FISIER,
+                suprafata,
+                (id_livada ?? " NECUNOSCUT "));
+            return obiectLivadaPentruFisier;
+        }
+       
+        public string InfoLivada()
+        {
+            string info = $"Suprafata livezii: {suprafata} , ID livezi: {id_livada ?? "NECUNOSCUT"}";
             return info;
+
         }
 
     }
