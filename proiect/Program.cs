@@ -37,7 +37,15 @@ namespace proiect
 
             Pom[] pomi = adminPomi.GetPomi(out nrpomi);
             Livada[] livezi = adminLivezi.GetLivada(out nrlivezi);
-    
+
+
+            string[] words = ReadWordsFromFile("pomi.txt");
+
+            string[][] wordArray = SplitWordsByFirstLetter(words);
+
+
+
+
             string optiune;
             do
             {
@@ -49,6 +57,7 @@ namespace proiect
                 Console.WriteLine("AL. Afisati livezile introduse");
                 Console.WriteLine("WL. Salvare livada in fisier");
                 Console.WriteLine("SL. Cautare livezi cu aceasi suprafata");
+                Console.WriteLine("T. Afisare tipuri de pomi");
                 Console.WriteLine("X. Iesire din program");
 
                 Console.WriteLine("Alegeti optiunea: ");
@@ -86,7 +95,11 @@ namespace proiect
                     case "W":
                         adminPomi.AddPomi(pomNou);
                         break;
+                    case "T":
+                         
+                       DisplayWordArray(wordArray);
 
+                        break;
                     case "X":
                         return;
                     default:
@@ -167,6 +180,102 @@ namespace proiect
             foreach (var livada in livezi)
             {
                 Console.WriteLine(livada.InfoLivada());
+            }
+        }
+        public static Pom[] IntroducereDetaliiPomi()
+        {
+            Console.Write("Introduceti numarul de pomi: ");
+            if (!int.TryParse(Console.ReadLine(), out int numarPomi) || numarPomi <= 0)
+            {
+                Console.WriteLine("Va rugam sa introduceti un numar valid de pomi.");
+                return new Pom[0];
+            }
+
+            Pom[] pomi = new Pom[numarPomi];
+
+            for (int i = 0; i < numarPomi; i++)
+            {
+                Console.WriteLine($"Introduceti detalii pentru pomul {i + 1}:");
+                Console.Write("Tipul de pom: ");
+                string tip = Console.ReadLine();
+
+                Console.Write("Cantitatea de fructe: ");
+                if (!int.TryParse(Console.ReadLine(), out int cantitateFructe))
+                {
+                    Console.WriteLine("Va rugam sa introduceti o valoare valida pentru cantitatea de fructe.");
+                    return new Pom[0];
+                }
+
+                Console.Write("Anul plantarii: ");
+                if (!int.TryParse(Console.ReadLine(), out int anulPlantarii))
+                {
+                    Console.WriteLine("Va rugam sa introduceti un an valid pentru plantare.");
+                    return new Pom[0];
+                }
+
+                pomi[i] = new Pom(tip, cantitateFructe, anulPlantarii);
+            }
+
+            return pomi;
+        }
+
+
+        static string[] ReadWordsFromFile(string filename)
+        {
+            try
+            {
+                return File.ReadAllLines(filename);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la citirea din fisier: {ex.Message}");
+                return new string[0];
+            }
+        }
+
+        static string[][] SplitWordsByFirstLetter(string[] words)
+        {
+            string[][] wordArray = new string[26][]; // Un tablou de 26 de elemente pentru cele 26 de litere ale alfabetului
+
+            for (int i = 0; i < 26; i++)
+            {
+                wordArray[i] = new string[0]; // Inițializăm fiecare componentă a tabloului cu un tablou gol
+            }
+
+            foreach (string word in words)
+            {
+                if (!string.IsNullOrEmpty(word))
+                {
+                    char firstLetter = char.ToUpper(word[0]); // Obținem prima literă și o convertim la majusculă
+
+                    int index = firstLetter - 'A'; // Calculăm indexul în tabloul wordArray folosind codul ASCII al literei
+
+                    // Adăugăm cuvântul la tabloul corespunzător primei litere
+                    wordArray[index] = AddWordToArray(wordArray[index], word);
+                }
+            }
+
+            return wordArray;
+        }
+
+        static string[] AddWordToArray(string[] array, string word)
+        {
+            Array.Resize(ref array, array.Length + 1); // Mărim tabloul cu o poziție
+            array[array.Length - 1] = word; // Adăugăm cuvântul la ultima poziție
+            return array;
+        }
+
+        static void DisplayWordArray(string[][] wordArray)
+        {
+            for (int i = 0; i < wordArray.Length; i++)
+            {
+                char letter = (char)('A' + i); // Obținem litera corespunzătoare indexului
+                Console.WriteLine($"Cuvintele care încep cu litera '{letter}':");
+                foreach (string word in wordArray[i])
+                {
+                    Console.WriteLine(word);
+                }
+                Console.WriteLine();
             }
         }
     }

@@ -47,42 +47,6 @@ namespace LibrarieModele
 
             return obiectPomPentruFisier;
         }
-        public static Pom[] IntroducereDetaliiPomi()
-        {
-            Console.Write("Introduceti numarul de pomi: ");
-            if (!int.TryParse(Console.ReadLine(), out int numarPomi) || numarPomi <= 0)
-            {
-                Console.WriteLine("Va rugam sa introduceti un numar valid de pomi.");
-                return new Pom[0];
-            }
-
-            Pom[] pomi = new Pom[numarPomi];
-
-            for (int i = 0; i < numarPomi; i++)
-            {
-                Console.WriteLine($"Introduceti detalii pentru pomul {i + 1}:");
-                Console.Write("Tipul de pom: ");
-                string tip = Console.ReadLine();
-
-                Console.Write("Cantitatea de fructe: ");
-                if (!int.TryParse(Console.ReadLine(), out int cantitateFructe))
-                {
-                    Console.WriteLine("Va rugam sa introduceti o valoare valida pentru cantitatea de fructe.");
-                    return new Pom[0];
-                }
-
-                Console.Write("Anul plantarii: ");
-                if (!int.TryParse(Console.ReadLine(), out int anulPlantarii))
-                {
-                    Console.WriteLine("Va rugam sa introduceti un an valid pentru plantare.");
-                    return new Pom[0];
-                }
-
-                pomi[i] = new Pom(tip, cantitateFructe, anulPlantarii);
-            }
-
-            return pomi;
-        }
         
         public string InfoPom()
         {
