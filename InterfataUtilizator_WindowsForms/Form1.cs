@@ -105,7 +105,6 @@ namespace InterfataUtilizator_WindowsForms
             //adaugare control de tip Label pentru 'Suprafata';
             lblSuprafata = new Label();
             lblSuprafata.Width = LATIME_CONTROL;
-            lblSuprafata.Text = "Suprafata livezi";
             lblSuprafata.Left = DIMENSIUNE_PAS_X * 4 ;
             lblSuprafata.ForeColor = Color.DarkGreen;
             this.Controls.Add(lblSuprafata);
@@ -270,13 +269,6 @@ namespace InterfataUtilizator_WindowsForms
                 i++;
             }
         }
-        private void AfiseazaLivezi()
-        {
-            Livada[] livezi = adminLivezi.GetLivada(out int nrlivezi);
-
-            lblsSuprafata= new Label[nrlivezi];
-            lblsId = new Label[nrlivezi];
-          
 
             int i = 0;
             foreach (Livada livada in livezi)
