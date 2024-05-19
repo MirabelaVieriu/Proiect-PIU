@@ -27,19 +27,19 @@ namespace InterfataUtilizator_WindowsForms
         private Label[] lblsCantitate;
         private Label[] lblsAn;
 
-        GestionareLiveziFisiereText adminLivezi;
-        private Label lblSuprafata;
-        private Label lblId;
+      //  GestionareLiveziFisiereText adminLivezi;
+       // private Label lblSuprafata;
+       // private Label lblId;
 
-        private Label[] lblsSuprafata;
-        private Label[] lblsId;
+       // private Label[] lblsSuprafata;
+       // private Label[] lblsId;
 
         private TextBox txtTip;
         private TextBox txtCantitate;
         private TextBox txtAn;
 
-        private TextBox txtSuprafata;
-        private TextBox txtId;
+       // private TextBox txtSuprafata;
+       // private TextBox txtId;
 
         private Button btnAdauga;
         private Button btnRefresh;
@@ -52,22 +52,23 @@ namespace InterfataUtilizator_WindowsForms
         private const int DIMENSIUNE_PAS_X = 120;
         public Form1()
         {
-           InitializeComponent();
+            InitializeComponent();
             string numeFisier = ConfigurationManager.AppSettings["NumeFisier"];
-            string numeFisierLivezi = ConfigurationManager.AppSettings["NumeFisierC"];
+           // string numeFisierLivezi = ConfigurationManager.AppSettings["NumeFisierC"];
 
             string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 
             string caleCompletaFisier = locatieFisierSolutie + "\\" + numeFisier;
-            string caleCompletaFisierLivezi = locatieFisierSolutie + "\\" + numeFisierLivezi;
+            //string caleCompletaFisierLivezi = locatieFisierSolutie + "\\" + numeFisierLivezi;
 
-            adminPomi=new GestionarePomiFisiereText(caleCompletaFisier);
-            int nrPomi = 0;
-            Pom[] pomi = adminPomi.GetPomi(out nrPomi);
+            adminPomi = new GestionarePomiFisiereText(caleCompletaFisier);
+           // int nrPomi = 0;
+           // Pom[] pomi = adminPomi.GetPomi(out nrPomi);
+            List<Pom> listaPomi = adminPomi.GetPomi();
 
-            adminLivezi = new GestionareLiveziFisiereText(caleCompletaFisierLivezi);
-            int nrlivezi = 0;
-            Livada[] livezi = adminLivezi.GetLivada(out nrlivezi);
+            /* adminLivezi = new GestionareLiveziFisiereText(caleCompletaFisierLivezi);
+             int nrlivezi = 0;
+             Livada[] livezi = adminLivezi.GetLivada(out nrlivezi);*/
 
             //setare proprietati
             this.Size = new Size(900, 300);
@@ -98,31 +99,31 @@ namespace InterfataUtilizator_WindowsForms
             lblAn = new Label();
             lblAn.Width = LATIME_CONTROL;
             lblAn.Text = "Anul plantari";
-            lblAn.Left = DIMENSIUNE_PAS_X * 3 ;
+            lblAn.Left = DIMENSIUNE_PAS_X * 3;
             lblAn.ForeColor = Color.DarkGreen;
             this.Controls.Add(lblAn);
 
-            //adaugare control de tip Label pentru 'Suprafata';
+           /* //adaugare control de tip Label pentru 'Suprafata';
             lblSuprafata = new Label();
             lblSuprafata.Width = LATIME_CONTROL;
-            lblSuprafata.Left = DIMENSIUNE_PAS_X * 4 ;
+            lblSuprafata.Left = DIMENSIUNE_PAS_X * 4;
             lblSuprafata.ForeColor = Color.DarkGreen;
-            this.Controls.Add(lblSuprafata);
+            this.Controls.Add(lblSuprafata);*/
 
-            //adaugare control de tip Label pentru 'Id';
-            lblId= new Label();
+           /* //adaugare control de tip Label pentru 'Id';
+            lblId = new Label();
             lblId.Width = LATIME_CONTROL;
             lblId.Text = "Id livada";
             lblId.Left = DIMENSIUNE_PAS_X * 5;
             lblId.ForeColor = Color.DarkGreen;
-            this.Controls.Add(lblId);
+            this.Controls.Add(lblId);*/
 
-          
+
 
             //textbox tip
             txtTip = new TextBox();
             txtTip.Width = LATIME_CONTROL;
-            txtTip.Left =  DIMENSIUNE_PAS_X;
+            txtTip.Left = DIMENSIUNE_PAS_X;
             txtTip.Top = DIMENSIUNE_PAS_Y + 80;
             this.Controls.Add(txtTip);
 
@@ -130,29 +131,29 @@ namespace InterfataUtilizator_WindowsForms
             txtCantitate = new TextBox();
             txtCantitate.Width = LATIME_CONTROL;
             txtCantitate.Left = 2 * DIMENSIUNE_PAS_X;
-            txtCantitate.Top = DIMENSIUNE_PAS_Y + 80; 
+            txtCantitate.Top = DIMENSIUNE_PAS_Y + 80;
             this.Controls.Add(txtCantitate);
 
             //textbox an
             txtAn = new TextBox();
             txtAn.Width = LATIME_CONTROL;
             txtAn.Left = 3 * DIMENSIUNE_PAS_X;
-            txtAn.Top = DIMENSIUNE_PAS_Y + 80; 
+            txtAn.Top = DIMENSIUNE_PAS_Y + 80;
             this.Controls.Add(txtAn);
 
-            //textbox suprafata
+           /*//textbox suprafata
             txtSuprafata = new TextBox();
             txtSuprafata.Width = LATIME_CONTROL;
             txtSuprafata.Left = 4 * DIMENSIUNE_PAS_X;
-            txtSuprafata.Top = DIMENSIUNE_PAS_Y + 80; 
-            this.Controls.Add(txtSuprafata);
+            txtSuprafata.Top = DIMENSIUNE_PAS_Y + 80;
+            this.Controls.Add(txtSuprafata);*/
 
-            //textbox id
+           /* //textbox id
             txtId = new TextBox();
             txtId.Width = LATIME_CONTROL;
             txtId.Left = 5 * DIMENSIUNE_PAS_X;
-            txtId.Top = DIMENSIUNE_PAS_Y + 80; 
-            this.Controls.Add(txtId);
+            txtId.Top = DIMENSIUNE_PAS_Y + 80;
+            this.Controls.Add(txtId);*/
 
             //Button Adauga
             btnAdauga = new Button();
@@ -170,24 +171,24 @@ namespace InterfataUtilizator_WindowsForms
             btnRefresh.Text = "Refresh";
 
             btnRefresh.Click += Form1_Load;
-            this.Controls.Add(btnRefresh); 
+            this.Controls.Add(btnRefresh);
 
             //Label erori
 
             lblErori = new Label();
-            lblErori.Location = new System.Drawing.Point( DIMENSIUNE_PAS_X, DIMENSIUNE_PAS_Y + 160) ;
+            lblErori.Location = new System.Drawing.Point(DIMENSIUNE_PAS_X, DIMENSIUNE_PAS_Y + 160);
             this.Controls.Add(lblErori);
 
         }
         private void OnButtonClicked(object sender, EventArgs e)
         {
-           
+
             string tip = txtTip.Text;
 
             //validare Mar
             if (tip.Trim() == "")
             {
-                lblTip.ForeColor=Color.Red;
+                lblTip.ForeColor = Color.Red;
                 lblErori.Text = "Tip gresit!";
                 return;
 
@@ -197,8 +198,8 @@ namespace InterfataUtilizator_WindowsForms
             if (!int.TryParse(txtCantitate.Text, out int cantitateFructe))
             {
                 lblCantitate.ForeColor = Color.Red;
-                lblErori.Text= "Cantitate gresita!";
-                return; 
+                lblErori.Text = "Cantitate gresita!";
+                return;
             }
 
             // Validate  Anul_plantarii
@@ -206,9 +207,9 @@ namespace InterfataUtilizator_WindowsForms
             {
                 lblErori.Text = "An gresit!";
                 lblAn.ForeColor = Color.Red;
-                return; 
+                return;
             }
-           
+
 
             // Creare un nou obiect de tip pom
             Pom p = new Pom(tip, cantitateFructe, anulPlantarii);
@@ -216,13 +217,13 @@ namespace InterfataUtilizator_WindowsForms
             lblTip.ForeColor = Color.DarkGreen;
             lblCantitate.ForeColor = Color.DarkGreen;
             lblAn.ForeColor = Color.DarkGreen;
-           
+
 
             lblErori.Text = "";
 
             adminPomi.AddPomi(p);
             AfiseazaPomi();
- 
+
         }
 
 
@@ -231,17 +232,18 @@ namespace InterfataUtilizator_WindowsForms
             AfiseazaPomi();
         }
 
-      
+
         private void AfiseazaPomi()
         {
-            Pom[] pomi = adminPomi.GetPomi(out int nrPomi);
-
+            //Pom[] pomi = adminPomi.GetPomi(out int nrPomi);
+            List<Pom> listaPomi = adminPomi.GetPomi();
+            int nrPomi = listaPomi.Count;
             lblsTip = new Label[nrPomi];
             lblsCantitate = new Label[nrPomi];
-            lblsAn= new Label[nrPomi];
+            lblsAn = new Label[nrPomi];
 
             int i = 0;
-            foreach (Pom pom in pomi)
+            foreach (Pom pom in listaPomi)
             {
                 //adaugare control de tip Label pentru tipul pomilor;
                 lblsTip[i] = new Label();
@@ -270,29 +272,35 @@ namespace InterfataUtilizator_WindowsForms
             }
         }
 
-            int i = 0;
-            foreach (Livada livada in livezi)
-            {
+       
+        private void pictureBox1_Click_1(object sender, EventArgs e)
+        {
 
-                //adaugare control de tip Label pentru suprafata livezi
-                lblsSuprafata[i] = new Label();
-                lblsSuprafata[i].Width = LATIME_CONTROL;
-                lblsSuprafata[i].Text = livada.suprafata.ToString();
-                lblsSuprafata[i].Left = 2 * DIMENSIUNE_PAS_X;
-                lblsSuprafata[i].Top = (i + 1) * DIMENSIUNE_PAS_Y;
-                this.Controls.Add(lblsSuprafata[i]);
+        }
 
-                //adaugare control de tip Label pentru id-ul livezi;
-                lblsId[i] = new Label();
-                lblsId[i].Width = LATIME_CONTROL;
-                lblsId[i].Text = livada.id_livada;
-                lblsId[i].Left = DIMENSIUNE_PAS_X;
-                lblsId[i].Top = (i + 1) * DIMENSIUNE_PAS_Y;
-                this.Controls.Add(lblsId[i]);
-                i++;
-            }
-        
-         }
+        /* int i = 0;
+             foreach (Livada livada in livezi)
+             {
+
+                 //adaugare control de tip Label pentru suprafata livezi
+                 lblsSuprafata[i] = new Label();
+         lblsSuprafata[i].Width = LATIME_CONTROL;
+                 lblsSuprafata[i].Text = livada.suprafata.ToString();
+                 lblsSuprafata[i].Left = 2 * DIMENSIUNE_PAS_X;
+                 lblsSuprafata[i].Top = (i + 1) * DIMENSIUNE_PAS_Y;
+                 this.Controls.Add(lblsSuprafata[i]);
+
+                 //adaugare control de tip Label pentru id-ul livezi;
+                 lblsId[i] = new Label();
+         lblsId[i].Width = LATIME_CONTROL;
+                 lblsId[i].Text = livada.id_livada;
+                 lblsId[i].Left = DIMENSIUNE_PAS_X;
+                 lblsId[i].Top = (i + 1) * DIMENSIUNE_PAS_Y;
+                 this.Controls.Add(lblsId[i]);
+                 i++;
+             }
+
+ }*/
 
 
     }

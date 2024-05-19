@@ -50,6 +50,21 @@ namespace NivelStocareDate
 
             return pomi;
         }
+        public List<Pom> GetPomi()
+        {
+            List<Pom> pomi = new List<Pom>();
+            using (StreamReader streamReader = new StreamReader(numeFisier))
+            {
+                string linieFisier;
+
+                while ((linieFisier = streamReader.ReadLine()) != null)
+                {
+                    pomi.Add(new Pom(linieFisier));
+                }
+            }
+            return pomi;
+
+        }
         public void AfisarePomiDeAcelasiTip(string tipCautat)
         {
             Console.WriteLine($"\nPomi de acelasi tip '{tipCautat}' sunt:");

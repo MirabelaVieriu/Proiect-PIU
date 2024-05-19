@@ -11,6 +11,7 @@ namespace NivelStocareDate
     public class GestionarePomi
 
     {
+        
 
         Pom[] pomi = new Pom[0];
         private const int NR_MAX_POM= 50;
@@ -35,6 +36,7 @@ namespace NivelStocareDate
             return pomi1;
         }
    
+     
 
 
      

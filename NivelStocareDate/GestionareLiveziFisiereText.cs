@@ -46,6 +46,19 @@ namespace NivelStocareDate
             Array.Resize(ref livezi, nrlivezi);
             return livezi;
         }
+        public List<Livada> GetLivada()
+        {
+            List<Livada> livezi = new List<Livada>();
+            using(StreamReader streamReader= new StreamReader(numeFisierC))
+            {
+                string linieFisier;
+                while((linieFisier=streamReader.ReadLine()) != null)
+                {
+                    livezi.Add(new Livada(linieFisier));
+                }
+            }
+            return livezi ;
+        }
 
         public void AfisareLiveziAceasiSuprafata(double cautare)
         {
