@@ -278,6 +278,11 @@ namespace InterfataUtilizator_WindowsForms
 
         }
 
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
         /* int i = 0;
              foreach (Livada livada in livezi)
              {

@@ -31,7 +31,10 @@ namespace InterfataUtilizator_WindowsForms
 
         private void Pomi_Click(object sender, EventArgs e)
         {
-            Form1 form=new Form1();
+    
+            PaginaPom form = new PaginaPom();
+           
+            
             form.ShowDialog();
         }
 
