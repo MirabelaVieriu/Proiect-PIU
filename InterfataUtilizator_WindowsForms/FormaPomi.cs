@@ -32,6 +32,7 @@ namespace InterfataUtilizator_WindowsForms
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy";
             dateTimePicker1.ShowUpDown = true;
+            dateTimePicker1.MaxDate = DateTime.Now;
         }
 
 
@@ -82,7 +83,27 @@ namespace InterfataUtilizator_WindowsForms
             {
                 rb = rbCires;
             }
-
+            if(rbcais.Checked )
+            {
+                rb=rbcais;
+            }
+            if(rbpiersic.Checked)
+            {
+                rb = rbpiersic;
+            }
+            if(rbgutui.Checked)
+            {
+                rb= rbgutui;
+            }
+            if(rbnuc.Checked)
+            {
+                rb = rbnuc;
+            }
+             if(rbvisin.Checked)
+            {
+                rb = rbvisin;
+            }
+           
             bool status;
             if (rb == null)
             {
@@ -130,6 +151,26 @@ namespace InterfataUtilizator_WindowsForms
             {
                 return Tip.Cires;
             }
+            if(rbcais.Checked)
+            {
+                return Tip.Cais;
+            }
+            if(rbpiersic.Checked)
+            {
+                return Tip.Piersic;
+            }
+            if(rbgutui.Checked)
+            {
+                return Tip.Gutui;
+            }
+            if(rbnuc.Checked)
+            {
+                return Tip.Nuc;
+            }
+            if(rbvisin.Checked)
+            { 
+                return Tip.Visin; 
+            }
             return Tip.Necunoscut;
            
         }
@@ -141,17 +182,14 @@ namespace InterfataUtilizator_WindowsForms
             rbMar.Checked = false;
             rbPar.Checked = false;
             rbPrun.Checked = false;
+            rbcais.Checked = false;
+            rbpiersic.Checked = false;
+            rbgutui.Checked = false;
+            rbnuc.Checked = false;
+            rbvisin.Checked = false;
    
         }
 
-        private void dgvPomi_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvPomi.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                tbCantitate.Text = dgvPomi.Rows[e.RowIndex].Cells["cantitate_fructe"].FormattedValue.ToString();
-                
-            }
-        }
 
         private void btnCauta_Click(object sender, EventArgs e)
         {
@@ -173,6 +211,26 @@ namespace InterfataUtilizator_WindowsForms
             }
             if(ckbCires.Checked) {
                 filtre.Add(Tip.Prun.ToString());
+            }
+            if (ckbCais.Checked)
+            {
+                filtre.Add(Tip.Cais.ToString());
+            }
+            if (ckbPiersic.Checked)
+            {
+                filtre.Add (Tip.Piersic.ToString());
+            }
+            if(ckbGutui.Checked)
+            {
+                filtre.Add(Tip.Gutui.ToString());
+            }
+            if(ckbNuc.Checked)
+            {
+                filtre.Add(Tip.Nuc.ToString());
+            }
+            if(ckbVisin.Checked)
+            {
+                filtre.Add(Tip.Visin.ToString());
             }
 
             List<Pom> pomi = adminPomi.GetPomi();
@@ -202,12 +260,25 @@ namespace InterfataUtilizator_WindowsForms
             ckbPar.Checked = false;
             ckbPrun.Checked = false;
             ckbCires.Checked = false;
+            ckbCais.Checked = false;
+            ckbPiersic.Checked = false;
+            ckbGutui.Checked = false;
+            ckbNuc.Checked = false;
+            ckbVisin.Checked = false;
 
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void btnRaport_Click(object sender, EventArgs e)
+        {
+            Raportcs form = new Raportcs();
+
+
+            form.ShowDialog();
         }
     }
 }

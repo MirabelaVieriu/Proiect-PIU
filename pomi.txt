@@ -3,3 +3,7 @@ Prun;12;2023
 Cires;54;2023
 Par;34;2018
 Mar;123;2018
+Visin;56;2012
+Cais;4;2022
+Necunoscut;5;2022
+Cais;5;2022

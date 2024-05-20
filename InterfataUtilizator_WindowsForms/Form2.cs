@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibrarieModele;
 using NivelStocareDate;
+using static System.Net.WebRequestMethods;
 
 namespace InterfataUtilizator_WindowsForms
 {
@@ -94,6 +95,49 @@ namespace InterfataUtilizator_WindowsForms
         {
             tbSuprafata.Text = string.Empty;
             tbId.Text = string.Empty;
+        }
+
+        private void btCauta_Click(object sender, EventArgs e)
+        {
+            dgvLivezi.DataSource = null;
+            dgvLivezi.Refresh();
+            List<Livada> livezi = adminLivezi.GetLivada();
+            List<Livada> liveziAlese = new List<Livada>();
+            string id= tbCauta.Text;
+            foreach (Livada livada in livezi )
+            {
+                if(livada.id_livada == id)
+                    liveziAlese.Add(livada);
+               
+
+            }
+            dgvLivezi.DataSource = liveziAlese;
+
+        }
+
+        private void btnModifica_Click(object sender, EventArgs e)
+        {
+            if (ValidateData())
+            {
+                double suprafata = Convert.ToDouble(tbSuprafata.Text);
+                string id = (tbId.Text);
+                Livada livadaActualizata = new Livada(suprafata, id);
+
+                if (adminLivezi.UpdateSuprafata(livadaActualizata)){
+                    lblErori.Text = "Livada actualizata";
+                    ReseteazaControale();
+                    AfisareLiveziInControlDataGridView(adminLivezi.GetLivada());
+                }
+
+            }
+
+        }
+
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            AfisareLiveziInControlDataGridView(adminLivezi.GetLivada());
+            tbCauta.Text= String.Empty;
         }
     }
 }

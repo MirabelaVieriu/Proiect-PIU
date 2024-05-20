@@ -65,6 +65,19 @@ namespace NivelStocareDate
             return pomi;
 
         }
+        public int NumarPomiCuAnul(int an)
+        {
+
+            int count = 0;
+            List<Pom> pomi = GetPomi();
+            foreach(Pom pom in pomi)
+            {
+                if(pom.anul_plantarii==an)
+                    count++;
+            }
+
+            return count;
+        }
         public void AfisarePomiDeAcelasiTip(string tipCautat)
         {
             Console.WriteLine($"\nPomi de acelasi tip '{tipCautat}' sunt:");

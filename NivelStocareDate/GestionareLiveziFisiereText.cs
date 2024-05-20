@@ -77,6 +77,31 @@ namespace NivelStocareDate
                 }
             }
         }
+
+        public bool UpdateSuprafata(Livada livadaActualizata)
+        {
+            List<Livada> livezi = GetLivada();
+            bool actualizareCuSucces = false;
+            using (StreamWriter streamWriterFisierText = new StreamWriter(numeFisierC, false))
+            {
+                foreach (Livada livada in livezi)
+                {
+                    Livada livadaPentruScrisInFisiser = livada;
+                    if (livada.id_livada == livadaActualizata.id_livada)
+                    {
+                        livadaPentruScrisInFisiser = livadaActualizata;
+                        
+                    }
+                    streamWriterFisierText.WriteLine(livadaPentruScrisInFisiser.ConversieLaSir_PentruFisier());
+
+                }
+                 actualizareCuSucces = true;
+
+
+            }
+            return actualizareCuSucces;
+
+        }
     }
 
 }
