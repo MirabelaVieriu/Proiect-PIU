@@ -50,7 +50,7 @@ namespace InterfataUtilizator_WindowsForms
                 adminPomi.AddPomi(pom);
 
                 AfisarePomiInControlDataGridView(adminPomi.GetPomi());
-                ResetazaControale();
+                ReseteazaControale();
 
             }
         }
@@ -103,6 +103,7 @@ namespace InterfataUtilizator_WindowsForms
             else if(!int.TryParse(tbCantitate.Text, out _))
             {
                 lblErori.Text = "Introduceti un numar la cantiate";
+                status = false;
             }
             else
             {
@@ -133,7 +134,7 @@ namespace InterfataUtilizator_WindowsForms
            
         }
 
-        private void ResetazaControale()
+        private void ReseteazaControale()
         {
             tbCantitate.Text = string.Empty;
             rbCires.Checked = false;
@@ -148,6 +149,7 @@ namespace InterfataUtilizator_WindowsForms
             if (dgvPomi.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 tbCantitate.Text = dgvPomi.Rows[e.RowIndex].Cells["cantitate_fructe"].FormattedValue.ToString();
+                
             }
         }
 
@@ -201,6 +203,11 @@ namespace InterfataUtilizator_WindowsForms
             ckbPrun.Checked = false;
             ckbCires.Checked = false;
 
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

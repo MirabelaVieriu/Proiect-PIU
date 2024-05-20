@@ -240,5 +240,11 @@
   <ItemGroup>
     <None Include="Resources\copac %281%29 %283%291.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
