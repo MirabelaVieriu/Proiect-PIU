@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using LibrarieModele;
 using NivelStocareDate;
 using static System.Net.WebRequestMethods;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace InterfataUtilizator_WindowsForms
 {
@@ -59,17 +60,33 @@ namespace InterfataUtilizator_WindowsForms
 
         private void btnAdauga_Click(object sender, EventArgs e)
         {
-            if(ValidateData())
+            if (ValidateData() && IdUnic())
             {
-                double suprafata = Convert.ToDouble(tbSuprafata.Text);  
+                double suprafata = Convert.ToDouble(tbSuprafata.Text);
                 string id = (tbId.Text);
 
                 Livada livada = new Livada(suprafata, id);
                 adminLivezi.AddLivezi(livada);
                 AfisareLiveziInControlDataGridView(adminLivezi.GetLivezi());
                 ReseteazaControale();
+                lblErori.Text = string.Empty;
             }
         }
+        private bool IdUnic()
+        {
+            bool status = true;
+            List<Livada> livezi = adminLivezi.GetLivezi();
+            foreach (Livada liv in livezi)
+            {
+                if (liv.id_livada == tbId.Text)
+                {
+                    status = false;
+                    lblErori.Text = "Id deja existent ";
+                }
+            }
+            return status;
+        }
+
         private bool ValidateData() 
         {
             bool status = true;
@@ -88,15 +105,7 @@ namespace InterfataUtilizator_WindowsForms
                 lblErori.Text = "Introduceti Id-ul";
                 status = false;
             }
-            List<Livada> livezi = adminLivezi.GetLivezi();
-            foreach(Livada liv in livezi)
-            {
-                if(liv.id_livada == tbId.Text)
-                {
-                    status = false;
-                    lblErori.Text = "Id deja existent ";
-                }
-            }
+      
             
             return status;
         }
