@@ -40,10 +40,11 @@
             this.lblErori = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnReset = new System.Windows.Forms.Button();
             this.btCauta = new System.Windows.Forms.Button();
             this.tbCauta = new System.Windows.Forms.TextBox();
             this.lblLivada = new System.Windows.Forms.Label();
-            this.btnReset = new System.Windows.Forms.Button();
+            this.btStergere = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLivezi)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -60,11 +61,11 @@
             this.dgvLivezi.RowHeadersWidth = 51;
             this.dgvLivezi.Size = new System.Drawing.Size(569, 245);
             this.dgvLivezi.TabIndex = 3;
-            this.dgvLivezi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLivezi_CellContentClick);
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btStergere);
             this.panel1.Controls.Add(this.btnModifica);
             this.panel1.Controls.Add(this.btnAdauga);
             this.panel1.Controls.Add(this.tbSuprafata);
@@ -81,7 +82,7 @@
             // 
             this.btnModifica.BackColor = System.Drawing.Color.PaleGreen;
             this.btnModifica.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModifica.Location = new System.Drawing.Point(159, 302);
+            this.btnModifica.Location = new System.Drawing.Point(148, 215);
             this.btnModifica.Name = "btnModifica";
             this.btnModifica.Size = new System.Drawing.Size(94, 28);
             this.btnModifica.TabIndex = 7;
@@ -93,7 +94,7 @@
             // 
             this.btnAdauga.BackColor = System.Drawing.Color.PaleGreen;
             this.btnAdauga.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdauga.Location = new System.Drawing.Point(36, 302);
+            this.btnAdauga.Location = new System.Drawing.Point(24, 215);
             this.btnAdauga.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdauga.Name = "btnAdauga";
             this.btnAdauga.Size = new System.Drawing.Size(100, 28);
@@ -185,6 +186,19 @@
             this.panel2.Size = new System.Drawing.Size(319, 135);
             this.panel2.TabIndex = 7;
             // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.PaleGreen;
+            this.btnReset.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.Black;
+            this.btnReset.Location = new System.Drawing.Point(128, 77);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(90, 35);
+            this.btnReset.TabIndex = 9;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // btCauta
             // 
             this.btCauta.BackColor = System.Drawing.Color.PaleGreen;
@@ -218,18 +232,17 @@
             this.lblLivada.TabIndex = 6;
             this.lblLivada.Text = "Id livada\r\n";
             // 
-            // btnReset
+            // btStergere
             // 
-            this.btnReset.BackColor = System.Drawing.Color.PaleGreen;
-            this.btnReset.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.ForeColor = System.Drawing.Color.Black;
-            this.btnReset.Location = new System.Drawing.Point(128, 77);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(90, 35);
-            this.btnReset.TabIndex = 9;
-            this.btnReset.Text = "Reset";
-            this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.btStergere.BackColor = System.Drawing.Color.PaleGreen;
+            this.btStergere.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btStergere.Location = new System.Drawing.Point(270, 215);
+            this.btStergere.Name = "btStergere";
+            this.btStergere.Size = new System.Drawing.Size(94, 28);
+            this.btStergere.TabIndex = 8;
+            this.btStergere.Text = "Sterge";
+            this.btStergere.UseVisualStyleBackColor = false;
+            this.btStergere.Click += new System.EventHandler(this.btStergere_Click);
             // 
             // Form2
             // 
@@ -277,5 +290,6 @@
         private System.Windows.Forms.TextBox tbCauta;
         private System.Windows.Forms.Label lblLivada;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btStergere;
     }
 }

@@ -68,7 +68,7 @@ namespace InterfataUtilizator_WindowsForms
 
             /* adminLivezi = new GestionareLiveziFisiereText(caleCompletaFisierLivezi);
              int nrlivezi = 0;
-             Livada[] livezi = adminLivezi.GetLivada(out nrlivezi);*/
+             Livada[] livezi = adminLivezi.GetLivezi(out nrlivezi);*/
 
             //setare proprietati
             this.Size = new Size(900, 300);

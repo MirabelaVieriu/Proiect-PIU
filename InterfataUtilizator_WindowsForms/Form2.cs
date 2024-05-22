@@ -27,8 +27,9 @@ namespace InterfataUtilizator_WindowsForms
             string locatieFisierSolutie = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
             string caleCompletaFisierLivezi = locatieFisierSolutie + "\\" + numeFisierLivezi;
             adminLivezi = new GestionareLiveziFisiereText(caleCompletaFisierLivezi);
-            listaLivezi = adminLivezi.GetLivada();
+            listaLivezi = adminLivezi.GetLivezi();
             AfisareLiveziInControlDataGridView(listaLivezi);
+            lblErori.ForeColor = Color.Red;
         }
         private void AfisareLiveziInControlDataGridView(List<Livada> livezi)
         {
@@ -65,13 +66,13 @@ namespace InterfataUtilizator_WindowsForms
 
                 Livada livada = new Livada(suprafata, id);
                 adminLivezi.AddLivezi(livada);
-                AfisareLiveziInControlDataGridView(adminLivezi.GetLivada());
+                AfisareLiveziInControlDataGridView(adminLivezi.GetLivezi());
                 ReseteazaControale();
             }
         }
         private bool ValidateData() 
         {
-            bool status;
+            bool status = true;
             if(tbSuprafata.Text == String.Empty)
             {
                 lblSuprafata.Text = "Introduceti Suprafata";
@@ -82,13 +83,21 @@ namespace InterfataUtilizator_WindowsForms
                 lblErori.Text = "Introduceti un numar la suprafata";
                 status = false;
             }
-            else { status= true; }
             if(tbId.Text == String.Empty) 
             {
-                lblId.Text = "Introduceti Id-ul";
+                lblErori.Text = "Introduceti Id-ul";
                 status = false;
             }
-            else { status= true; }
+            List<Livada> livezi = adminLivezi.GetLivezi();
+            foreach(Livada liv in livezi)
+            {
+                if(liv.id_livada == tbId.Text)
+                {
+                    status = false;
+                    lblErori.Text = "Id deja existent ";
+                }
+            }
+            
             return status;
         }
         private void ReseteazaControale()
@@ -101,7 +110,7 @@ namespace InterfataUtilizator_WindowsForms
         {
             dgvLivezi.DataSource = null;
             dgvLivezi.Refresh();
-            List<Livada> livezi = adminLivezi.GetLivada();
+            List<Livada> livezi = adminLivezi.GetLivezi();
             List<Livada> liveziAlese = new List<Livada>();
             string id= tbCauta.Text;
             foreach (Livada livada in livezi )
@@ -126,7 +135,7 @@ namespace InterfataUtilizator_WindowsForms
                 if (adminLivezi.UpdateSuprafata(livadaActualizata)){
                     lblErori.Text = "Livada actualizata";
                     ReseteazaControale();
-                    AfisareLiveziInControlDataGridView(adminLivezi.GetLivada());
+                    AfisareLiveziInControlDataGridView(adminLivezi.GetLivezi());
                 }
 
             }
@@ -136,8 +145,29 @@ namespace InterfataUtilizator_WindowsForms
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            AfisareLiveziInControlDataGridView(adminLivezi.GetLivada());
+            AfisareLiveziInControlDataGridView(adminLivezi.GetLivezi());
             tbCauta.Text= String.Empty;
+        }
+
+        private void btStergere_Click(object sender, EventArgs e)
+        {
+
+
+            string id = tbId.Text;
+            bool succes = adminLivezi.StergeLivada(id);
+            if (succes)
+            {
+                lblErori.Text = "Livada a fost stearsa";
+                AfisareLiveziInControlDataGridView(adminLivezi.GetLivezi());
+            }
+            else
+            {
+                lblErori.Text = "Livada nu a fost stearsa";
+
+
+            }
+
+
         }
     }
 }

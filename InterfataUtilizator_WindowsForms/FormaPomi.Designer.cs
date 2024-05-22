@@ -279,7 +279,6 @@
             this.dgvPomi.RowHeadersWidth = 51;
             this.dgvPomi.Size = new System.Drawing.Size(699, 255);
             this.dgvPomi.TabIndex = 2;
-            this.dgvPomi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPomi_CellContentClick);
             // 
             // panel2
             // 

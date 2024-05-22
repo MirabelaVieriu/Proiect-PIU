@@ -33,6 +33,7 @@ namespace InterfataUtilizator_WindowsForms
             dateTimePicker1.CustomFormat = "yyyy";
             dateTimePicker1.ShowUpDown = true;
             dateTimePicker1.MaxDate = DateTime.Now;
+            lblErori.ForeColor = Color.Red;
         }
 
 
@@ -123,7 +124,7 @@ namespace InterfataUtilizator_WindowsForms
             }
             else if(!int.TryParse(tbCantitate.Text, out _))
             {
-                lblErori.Text = "Introduceti un numar la cantiate";
+                lblErori.Text = "Introduceti un numar la cantitate";
                 status = false;
             }
             else
@@ -193,7 +194,7 @@ namespace InterfataUtilizator_WindowsForms
 
         private void btnCauta_Click(object sender, EventArgs e)
         {
-            dgvPomi.DataSource = tbCantitate.Text;
+            dgvPomi.DataSource = null;
             dgvPomi.Refresh();
 
             List<string> filtre = new List<string>();

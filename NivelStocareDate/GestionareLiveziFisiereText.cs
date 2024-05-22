@@ -1,6 +1,7 @@
 ﻿using LibrarieModele;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,7 @@ namespace NivelStocareDate
             Array.Resize(ref livezi, nrlivezi);
             return livezi;
         }
-        public List<Livada> GetLivada()
+        public List<Livada> GetLivezi()
         {
             List<Livada> livezi = new List<Livada>();
             using(StreamReader streamReader= new StreamReader(numeFisierC))
@@ -80,7 +81,7 @@ namespace NivelStocareDate
 
         public bool UpdateSuprafata(Livada livadaActualizata)
         {
-            List<Livada> livezi = GetLivada();
+            List<Livada> livezi = GetLivezi();
             bool actualizareCuSucces = false;
             using (StreamWriter streamWriterFisierText = new StreamWriter(numeFisierC, false))
             {
@@ -100,6 +101,29 @@ namespace NivelStocareDate
 
             }
             return actualizareCuSucces;
+
+        }
+
+        public bool StergeLivada(string id)
+        {
+            List<Livada> livezi = GetLivezi();
+            bool stergereCuSucces = false;
+            using (StreamWriter streamWriterFisierText = new StreamWriter(numeFisierC, false))
+            {
+                foreach (Livada livada in livezi)
+                {
+                    if(livada.id_livada != id)
+                    {
+                        streamWriterFisierText.WriteLine(livada.ConversieLaSir_PentruFisier());
+
+                    }
+                    else
+                    {
+                        stergereCuSucces = true;
+                    }
+                }
+             }
+            return stergereCuSucces;
 
         }
     }
